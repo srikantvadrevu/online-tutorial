@@ -19,29 +19,28 @@ public class loginservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid,password;
-		userid=request.getParameter("userid");
-		password=request.getParameter("pwd");
-		HttpSession session = request.getSession();  
-		loginservice l= new loginservice();
-		boolean a= l.authenticate (userid,password);
-		if(a)
-		{
-			
-	        session.setAttribute("userid", userid);
-	        session.setAttribute("password", password);
-			
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userid, password;
+		userid = request.getParameter("userid");
+		password = request.getParameter("pwd");
+		HttpSession session = request.getSession();
+		loginservice l = new loginservice();
+		boolean a = l.authenticate(userid, password);
+		if (a) {
+
+			session.setAttribute("userid", userid);
+			session.setAttribute("password", password);
+
 			response.sendRedirect("success.jsp");
 			return;
-		}
-		else
-		{
-			
-			    session.setAttribute("error", "Username or Password is incorrect");
-			    //redirect to index.jsp
+		} else {
+
+			session.setAttribute("error", "Username or Password is incorrect");
+			// redirect to index.jsp
 			response.sendRedirect("login.jsp");
 			return;
 		}
